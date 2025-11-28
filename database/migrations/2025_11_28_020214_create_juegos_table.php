@@ -6,20 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('juegos', function (Blueprint $table) {
             $table->id();
+            $table->string('codigo', 20)->unique()->nullable();
+            $table->enum('estado', ['esperando', 'jugando', 'finalizado'])->default('esperando')->nullable();
+            $table->json('numeros_sorteados')->nullable();
+            $table->foreignId('tarjeta_ganadora_id')->nullable()->constrained('tarjetas')->onDelete('set null');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('juegos');

@@ -6,20 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('tarjetas', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('codigo', 20)->unique()->nullable();
+            $table->timestamp('creada_en')->nullable()->useCurrent();
+            $table->string('nombre', 255);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('tarjetas');
