@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('codigo', 20)->unique()->nullable();
             $table->timestamp('creada_en')->nullable()->useCurrent();
             $table->string('nombre', 255);
+            $table->timestamps();
         });
     }
 
