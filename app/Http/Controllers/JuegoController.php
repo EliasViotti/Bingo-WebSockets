@@ -42,7 +42,7 @@ class JuegoController extends Controller
         }
 
         $numerosSorteados = $juego->numeros_sorteados ?? [];
-        $numerosDisponibles = array_diff(range(1, 75), $numerosSorteados);
+        $numerosDisponibles = array_diff(range(1, 99), $numerosSorteados);
 
         if (empty($numerosDisponibles)) {
             return response()->json(['error' => 'No hay más números'], 400);
