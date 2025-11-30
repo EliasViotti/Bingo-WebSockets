@@ -5,49 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bingo Online</title>
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            background: white;
-            padding: 50px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .boton {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 18px;
-            border-radius: 25px;
-            cursor: pointer;
-            margin: 10px;
-            text-decoration: none;
-            display: inline-block;
-        }
-    </style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
-    <div class="container">
-        <h1 style="color: #667eea; font-size: 48px;">🎲 Bingo Online 🎲</h1>
-        <p style="color: #666; font-size: 18px;">Elige una opción para comenzar</p>
+<body
+    class="bg-[linear-gradient(135deg,#667eea_0%,#764ba2_100%)] min-h-screen flex items-center justify-center font-sans">
 
-        <form action="{{ route('bingo.juego.crear') }}" method="POST" style="margin: 30px 0;">
+    <div class="bg-white p-12 rounded-[20px] text-center shadow-[0_20px_60px_rgba(0,0,0,0.3)] max-w-lg w-full">
+        <h1 class="text-[#667eea] text-5xl font-bold mb-4">🎲 Bingo Online 🎲</h1>
+        <p class="text-gray-500 text-lg mb-8">Elige una opción para comenzar</p>
+
+        <form action="{{ route('bingo.juego.crear') }}" method="POST" class="my-8">
             @csrf
-            <button type="submit" class="boton">🎰 Crear Nuevo Juego</button>
+            <button type="submit"
+                class="bg-[linear-gradient(135deg,#667eea_0%,#764ba2_100%)] text-white border-none py-4 px-10 text-lg rounded-full cursor-pointer m-2 inline-block transition-transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl">
+                🎰 Crear Nuevo Juego
+            </button>
         </form>
     </div>
+
 </body>
 
 </html>
