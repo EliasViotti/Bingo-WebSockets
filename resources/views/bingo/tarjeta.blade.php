@@ -156,7 +156,7 @@
                 const bola = document.querySelector(`[data-numero="${numero}"]`);
                 if (bola) {
                     bola.className =
-                        'w-[60px] h-[60px] rounded-full flex items-center justify-center text-2xl font-bold bg-gradient-to-br from-blue-400 to-cyan-400 text-white transition-all duration-300 cursor-pointer border-[3px] border-blue-700 scale-90';
+                        'w-[60px] h-[60px] rounded-full flex items-center justify-center text-2xl font-bold bg-gradient-to-br from-blue-400 to-cyan-400 text-white transition-all duration-300 cursor-pointer border-[3px] border-blue-700 scale-90 mx-auto';
                 }
 
                 const contador = document.getElementById('contador-marcados');
