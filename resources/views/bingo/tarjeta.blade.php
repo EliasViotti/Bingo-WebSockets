@@ -11,54 +11,6 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,800" rel="stylesheet" />
-
-    <style>
-        @keyframes pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.1);
-            }
-        }
-
-        @keyframes confetti-fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        @keyframes bounce {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.2);
-            }
-        }
-
-        .ultimo-numero {
-            animation: pulse 1s ease-in-out;
-        }
-
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            animation: confetti-fall 3s linear;
-        }
-
-        .ganador-content {
-            animation: bounce 0.5s ease;
-        }
-    </style>
 </head>
 
 <body class="bg-gradient-to-br from-indigo-500 to-purple-600 min-h-screen p-5">

@@ -11,40 +11,6 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,800" rel="stylesheet" />
-
-    <style>
-        @keyframes aparecer {
-            from {
-                transform: scale(0) rotate(-180deg);
-                opacity: 0;
-            }
-
-            to {
-                transform: scale(1) rotate(0deg);
-                opacity: 1;
-            }
-        }
-
-        @keyframes resaltar {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.3);
-            }
-        }
-
-        .bola-gigante {
-            animation: aparecer 0.5s ease;
-        }
-
-        .numero-sorteado.ultimo {
-            animation: resaltar 1s ease;
-        }
-    </style>
 </head>
 
 <body class="bg-gradient-to-br from-teal-500 to-green-400 min-h-screen p-5">
