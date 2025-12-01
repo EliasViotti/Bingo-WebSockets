@@ -8,22 +8,19 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body
-    class="bg-[linear-gradient(135deg,#667eea_0%,#764ba2_100%)] min-h-screen flex items-center justify-center font-sans">
+<body class="bg-gradient-to-br from-indigo-500 to-purple-600 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-12 rounded-3xl text-center shadow-2xl">
+        <h1 class="text-indigo-500 text-5xl font-bold my-8">🎲 Bingo Online 🎲</h1>
+        <p class="text-gray-600 text-lg my-4.5">Elige una opción para comenzar</p>
 
-    <div class="bg-white p-12 rounded-[20px] text-center shadow-[0_20px_60px_rgba(0,0,0,0.3)] max-w-lg w-full">
-        <h1 class="text-[#667eea] text-5xl font-bold mb-4">🎲 Bingo Online 🎲</h1>
-        <p class="text-gray-500 text-lg mb-8">Elige una opción para comenzar</p>
-
-        <form action="{{ route('bingo.juego.crear') }}" method="POST" class="my-8">
+        <form action="{{ route('bingo.juego.crear') }}" method="POST" class="my-7.5">
             @csrf
             <button type="submit"
-                class="bg-[linear-gradient(135deg,#667eea_0%,#764ba2_100%)] text-white border-none py-4 px-10 text-lg rounded-full cursor-pointer m-2 inline-block transition-transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl">
+                class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white border-none px-10 py-4 text-lg rounded-full cursor-pointer mx-2.5 inline-block hover:shadow-xl hover:-translate-y-1 transition-all">
                 🎰 Crear Nuevo Juego
             </button>
         </form>
     </div>
-
 </body>
 
 </html>
