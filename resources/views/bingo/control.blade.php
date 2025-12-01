@@ -7,43 +7,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Control del Bingo</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,800" rel="stylesheet" />
+
     <style>
-        body {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            min-height: 100vh;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-        }
-
-        .control-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .panel {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px;
-        }
-
-        .bola-gigante {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 120px;
-            font-weight: bold;
-            color: white;
-            margin: 30px auto;
-            box-shadow: 0 15px 35px rgba(245, 87, 108, 0.4);
-            animation: aparecer 0.5s ease;
-        }
-
         @keyframes aparecer {
             from {
                 transform: scale(0) rotate(-180deg);
@@ -54,56 +23,6 @@
                 transform: scale(1) rotate(0deg);
                 opacity: 1;
             }
-        }
-
-        .boton-sortear {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 20px 60px;
-            font-size: 24px;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-        }
-
-        .boton-sortear:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
-        }
-
-        .boton-sortear:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            box-shadow: none;
-        }
-
-        .grid-sorteados {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .numero-sorteado {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #e0e0e0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: #666;
-            font-size: 18px;
-        }
-
-        .numero-sorteado.ultimo {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            animation: resaltar 1s ease;
         }
 
         @keyframes resaltar {
@@ -118,89 +37,69 @@
             }
         }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 48px;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        .ganador-anuncio {
-            background: linear-gradient(135deg, #4caf50 0%, #8bc34a 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            font-size: 24px;
-            margin: 20px 0;
+        .bola-gigante {
             animation: aparecer 0.5s ease;
+        }
+
+        .numero-sorteado.ultimo {
+            animation: resaltar 1s ease;
         }
     </style>
 </head>
 
-<body>
-    <div class="control-container">
+<body class="bg-gradient-to-br from-teal-500 to-green-400 min-h-screen p-5">
+    <div class="max-w-6xl mx-auto">
         <!-- Header -->
-        <div class="panel" style="text-align: center;">
-            <h1 style="color: #11998e; font-size: 48px; margin: 0;">🎰 CONTROL DE BINGO 🎰</h1>
-            <p style="font-size: 20px; color: #666; margin: 10px 0;">Código del Juego:
-                <strong>{{ $juego->codigo }}</strong>
+        <div class="bg-white rounded-3xl p-8 shadow-2xl mb-5 text-center">
+            <h1 class="text-teal-600 text-5xl font-bold m-0">🎰 CONTROL DE BINGO 🎰</h1>
+            <p class="text-xl text-gray-600 my-2.5">
+                Código del Juego: <strong>{{ $juego->codigo }}</strong>
             </p>
-            <p style="color: #999;">Comparte este código con los jugadores para que se unan</p>
-            <div style="margin-top: 15px;">
+            <p class="text-gray-400">Comparte este código con los jugadores para que se unan</p>
+            <div class="mt-4">
                 <a href="/bingo/tarjeta/{{ $juego->codigo }}" target="_blank"
-                    style="background: #667eea; color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; display: inline-block;">
+                    class="inline-block bg-indigo-500 text-white px-5 py-2.5 rounded-full no-underline hover:bg-indigo-600 transition">
                     🎫 Abrir Nueva Tarjeta
                 </a>
             </div>
         </div>
 
         <!-- Panel Principal -->
-        <div class="panel">
-            <div style="text-align: center;">
-                <h2 style="color: #333; margin-bottom: 20px;">Sorteo Actual</h2>
+        <div class="bg-white rounded-3xl p-8 shadow-2xl mb-5">
+            <div class="text-center">
+                <h2 class="text-gray-800 text-2xl mb-5">Sorteo Actual</h2>
 
-                <div id="bola-container" style="display: none;">
-                    <div class="bola-gigante" id="bola-numero">?</div>
+                <div id="bola-container" class="hidden">
+                    <div id="bola-numero"
+                        class="bola-gigante w-64 h-64 rounded-full bg-gradient-to-br from-pink-400 to-red-500 flex items-center justify-center text-9xl font-bold text-white mx-auto my-8 shadow-2xl">
+                        ?
+                    </div>
                 </div>
 
-                <div id="mensaje-inicial" style="padding: 50px; color: #999; font-size: 20px;">
+                <div id="mensaje-inicial" class="py-12 text-gray-400 text-xl">
                     Presiona el botón para comenzar el sorteo
                 </div>
 
-                <button id="btn-sortear" class="boton-sortear" onclick="sortearNumero()">
+                <button id="btn-sortear" onclick="sortearNumero()"
+                    class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white border-none px-16 py-5 text-2xl font-bold rounded-full cursor-pointer transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 disabled:bg-gray-300 disabled:cursor-not-allowed disabled:shadow-none">
                     🎲 SORTEAR NÚMERO
                 </button>
             </div>
 
             <!-- Estadísticas -->
-            <div class="stats">
-                <div class="stat-card">
+            <div class="grid grid-cols-3 gap-5 my-5">
+                <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-5 rounded-2xl text-center">
                     <div>Números Sorteados</div>
-                    <div class="stat-number" id="total-sorteados">0</div>
+                    <div id="total-sorteados" class="text-5xl font-bold my-2.5">0</div>
                     <div>de 100</div>
                 </div>
-                <div class="stat-card">
+                <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-5 rounded-2xl text-center">
                     <div>Último Número</div>
-                    <div class="stat-number" id="ultimo-stat">-</div>
+                    <div id="ultimo-stat" class="text-5xl font-bold my-2.5">-</div>
                 </div>
-                <div class="stat-card">
+                <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-5 rounded-2xl text-center">
                     <div>Estado</div>
-                    <div class="stat-number" style="font-size: 24px; margin-top: 20px;" id="estado-juego">
+                    <div id="estado-juego" class="text-2xl mt-5">
                         {{ $juego->estado === 'esperando' ? '⏳ Esperando' : ($juego->estado === 'jugando' ? '▶️ Jugando' : '✅ Finalizado') }}
                     </div>
                 </div>
@@ -208,18 +107,20 @@
         </div>
 
         <!-- Anuncio de Ganador -->
-        <div id="ganador-anuncio" style="display: none;" class="ganador-anuncio">
-            <h2 style="margin: 0 0 10px 0;">🎉 ¡TENEMOS UN GANADOR! 🎉</h2>
-            <p id="ganador-info" style="margin: 0; font-size: 28px;"></p>
+        <div id="ganador-anuncio"
+            class="hidden bg-gradient-to-r from-green-500 to-lime-400 text-white p-8 rounded-2xl text-center text-2xl my-5">
+            <h2 class="m-0 mb-2.5">🎉 ¡TENEMOS UN GANADOR! 🎉</h2>
+            <p id="ganador-info" class="m-0 text-3xl"></p>
         </div>
 
         <!-- Panel de Números Sorteados -->
-        <div class="panel">
-            <h2 style="color: #333; margin-bottom: 20px;">Números Sorteados</h2>
-            <div class="grid-sorteados" id="grid-sorteados">
+        <div class="bg-white rounded-3xl p-8 shadow-2xl">
+            <h2 class="text-gray-800 text-2xl mb-5">Números Sorteados</h2>
+            <div id="grid-sorteados" class="grid gap-2.5 mt-5"
+                style="grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));">
                 <!-- Los números se agregarán aquí dinámicamente -->
             </div>
-            <p id="sin-numeros" style="text-align: center; color: #999; padding: 30px;">
+            <p id="sin-numeros" class="text-center text-gray-400 py-8">
                 Aún no se han sorteado números
             </p>
         </div>
@@ -229,58 +130,50 @@
         document.addEventListener("DOMContentLoaded", () => {
             // --- 1. DATOS INICIALES ---
             const codigoJuego = '{{ $juego->codigo }}';
-            // Convertimos a array de JS
-            let numerosSorteados = @json($juego->numeros_sorteados ?? []); 
+            let numerosSorteados = @json($juego->numeros_sorteados ?? []);
             let juegoFinalizado = {{ $juego->estado === 'finalizado' ? 'true' : 'false' }};
-    
+
             // --- 2. ESTADO INICIAL ---
             if (numerosSorteados.length > 0) {
                 const ultimo = numerosSorteados[numerosSorteados.length - 1];
-                // Simulamos que se acaba de mostrar el último para inicializar la vista
-                mostrarNumeroSorteado(ultimo, false); // false = sin animación
+                mostrarNumeroSorteado(ultimo, false);
                 actualizarGridSorteados();
             }
-    
+
             if (juegoFinalizado) {
                 bloquearJuego();
             }
-    
-            // Definir config global por si echo.js lo necesita (opcional)
+
             window.juegoConfig = {
                 codigoJuego: codigoJuego,
                 numerosSorteados: numerosSorteados,
                 juegoFinalizado: juegoFinalizado,
             };
-    
-            // --- 3. CONEXIÓN WEBSOCKET (La parte que faltaba) ---
+
+            // --- 3. CONEXIÓN WEBSOCKET ---
             const iniciarConexionControl = () => {
                 if (!window.Echo) {
                     console.log("[Control] Esperando a Echo...");
                     setTimeout(iniciarConexionControl, 100);
                     return;
                 }
-    
+
                 console.log("[Control] Escuchando canal:", `bingo.${codigoJuego}`);
-    
+
                 window.Echo.channel(`bingo.${codigoJuego}`)
                     .listen('.numero.sorteado', (data) => {
                         console.log("⚡ Evento Recibido:", data);
-                        
-                        // 1. Agregar al array local
+
                         const nuevoNumero = parseInt(data.numero);
-                        
-                        // Evitar duplicados visuales si el evento llega dos veces
+
                         if (!numerosSorteados.includes(nuevoNumero)) {
                             numerosSorteados.push(nuevoNumero);
-                            
-                            // 2. Actualizar UI
-                            mostrarNumeroSorteado(nuevoNumero, true); // true = con animación
+                            mostrarNumeroSorteado(nuevoNumero, true);
                             actualizarGridSorteados();
                         }
-                        
-                        // 3. Reactivar botón si estaba deshabilitado por el fetch
+
                         const btn = document.getElementById('btn-sortear');
-                        if(btn) {
+                        if (btn) {
                             btn.disabled = false;
                             btn.textContent = '🎲 SORTEAR NÚMERO';
                         }
@@ -292,107 +185,103 @@
                         alert(`¡JUEGO FINALIZADO!\nGanador: ${data.tarjeta.nombre}`);
                     });
             };
-    
+
             iniciarConexionControl();
-    
-            // --- 4. FUNCIÓN SORTEAR (Fetch) ---
-            // Hacemos global la función para que el onclick del HTML funcione
+
+            // --- 4. FUNCIÓN SORTEAR ---
             window.sortearNumero = function() {
                 if (juegoFinalizado) return;
-    
+
                 const boton = document.getElementById('btn-sortear');
                 boton.disabled = true;
                 boton.textContent = '🎲 Sorteando...';
-    
+
                 fetch(`/bingo/juego/${codigoJuego}/sortear`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    }
-                })
-                .then(res => res.json())
-                .then(data => {
-                    console.log('Orden enviada. Esperando WebSocket...', data);
-                    // NO actualizamos la UI aquí. Esperamos al evento .listen de arriba
-                    // para asegurar que todos vean lo mismo al mismo tiempo.
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error al sortear número');
-                    boton.disabled = false;
-                    boton.textContent = '🎲 SORTEAR NÚMERO';
-                });
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log('Orden enviada. Esperando WebSocket...', data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error al sortear número');
+                        boton.disabled = false;
+                        boton.textContent = '🎲 SORTEAR NÚMERO';
+                    });
             };
-    
+
             // --- 5. FUNCIONES DE UI ---
-    
             function mostrarNumeroSorteado(numero, animar = true) {
                 const msgInicial = document.getElementById('mensaje-inicial');
-                if(msgInicial) msgInicial.style.display = 'none';
-    
+                if (msgInicial) msgInicial.classList.add('hidden');
+
                 const bolaContainer = document.getElementById('bola-container');
                 const bolaNumerElement = document.getElementById('bola-numero');
-    
-                if(bolaContainer) bolaContainer.style.display = 'block';
-                
-                if(bolaNumerElement) {
+
+                if (bolaContainer) bolaContainer.classList.remove('hidden');
+
+                if (bolaNumerElement) {
                     bolaNumerElement.textContent = numero;
-                    
-                    if(animar) {
+
+                    if (animar) {
                         bolaNumerElement.style.animation = 'none';
-                        bolaNumerElement.offsetHeight; // Trigger reflow
+                        bolaNumerElement.offsetHeight;
                         bolaNumerElement.style.animation = 'aparecer 0.5s ease';
                     }
                 }
-    
-                // Actualizar estadísticas simples
+
                 const statUltimo = document.getElementById('ultimo-stat');
                 const statTotal = document.getElementById('total-sorteados');
                 const statEstado = document.getElementById('estado-juego');
-    
-                if(statUltimo) statUltimo.textContent = numero;
-                if(statTotal) statTotal.textContent = numerosSorteados.length;
-                if(statEstado) statEstado.textContent = '▶️ Jugando';
+
+                if (statUltimo) statUltimo.textContent = numero;
+                if (statTotal) statTotal.textContent = numerosSorteados.length;
+                if (statEstado) statEstado.textContent = '▶️ Jugando';
             }
-    
+
             function actualizarGridSorteados() {
                 const grid = document.getElementById('grid-sorteados');
                 const sinNumeros = document.getElementById('sin-numeros');
-    
+
                 if (!grid) return;
-    
+
                 if (numerosSorteados.length === 0) {
-                    if(sinNumeros) sinNumeros.style.display = 'block';
+                    if (sinNumeros) sinNumeros.classList.remove('hidden');
                     grid.innerHTML = '';
                     return;
                 }
-    
-                if(sinNumeros) sinNumeros.style.display = 'none';
+
+                if (sinNumeros) sinNumeros.classList.add('hidden');
                 grid.innerHTML = '';
-    
-                // Renderizar grid
+
                 numerosSorteados.forEach((numero, index) => {
                     const div = document.createElement('div');
-                    div.className = 'numero-sorteado';
-                    // Efecto visual para el último
+                    div.className =
+                        'w-[50px] h-[50px] rounded-full bg-gray-300 flex items-center justify-center font-bold text-gray-600 text-lg numero-sorteado';
+
                     if (index === numerosSorteados.length - 1) {
-                        div.classList.add('ultimo');
+                        div.className =
+                            'w-[50px] h-[50px] rounded-full bg-gradient-to-br from-pink-400 to-red-500 flex items-center justify-center font-bold text-white text-lg numero-sorteado ultimo';
                     }
                     div.textContent = numero;
                     grid.appendChild(div);
                 });
             }
-    
+
             function bloquearJuego() {
                 const btn = document.getElementById('btn-sortear');
-                if(btn) {
+                if (btn) {
                     btn.disabled = true;
                     btn.textContent = '🏁 JUEGO FINALIZADO';
                     btn.classList.add('opacity-50', 'cursor-not-allowed');
                 }
                 const estado = document.getElementById('estado-juego');
-                if(estado) estado.textContent = '🏁 Finalizado';
+                if (estado) estado.textContent = '🏁 Finalizado';
             }
         });
     </script>
