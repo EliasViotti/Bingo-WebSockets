@@ -157,6 +157,7 @@ return [
             'password' => env('REDIS_PASSWORD'),
             'port' => env('REDIS_PORT', '6379'),
             'database' => env('REDIS_DB', '0'),
+            'schema' => 'tls',
             // 👇 ESTE ES EL BLOQUE QUE TE FALTA
             'context' => [
                 'ssl' => [
@@ -172,6 +173,7 @@ return [
             'password' => env('REDIS_PASSWORD'),
             'port' => env('REDIS_PORT', '6379'),
             'database' => env('REDIS_CACHE_DB', '1'),
+            'schema' => 'tls',
             // 👇 AQUÍ TAMBIÉN
             'context' => [
                 'ssl' => [
