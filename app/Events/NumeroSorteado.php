@@ -32,9 +32,9 @@ class NumeroSorteado implements ShouldBroadcastNow
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): Channel   
+    public function broadcastOn(): array   
     {
-        return new Channel('bingo.' . $this->codigoJuego);
+        return [new Channel('bingo.' . $this->codigoJuego)];
     }
 
     public function broadcastAs()
