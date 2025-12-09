@@ -1,60 +1,57 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Bingo en Tiempo Real (Laravel + Echo + Reverb)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto es una aplicación de **bingo en tiempo real**, desarrollada con **Laravel**, utilizando **WebSockets** para sincronizar las jugadas entre todos los participantes sin necesidad de recargar la página.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ⚙️ ¿Cómo funciona?
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🔌 Comunicación en tiempo real
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+La aplicación usa:
 
-## Learning Laravel
+* **Laravel Echo** → cliente que escucha eventos del servidor.
+* **Laravel Reverb** → servidor WebSocket nativo de Laravel.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Cuando el administrador del bingo **lanza un nuevo número**, se dispara un evento en Laravel que se envía a Reverb, y Echo lo recibe automáticamente en todos los navegadores conectados.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 🔄 Sincronización instantánea
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Cada vez que se realiza una acción:
 
-### Premium Partners
+1. Se genera un **evento de Laravel** (`NumeroSorteado`).
+2. El evento se transmite por un **canal de broadcasting**.
+3. Todos los jugadores reciben la actualización **al instante**, sin refrescar.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Esto permite que todos vean:
 
-## Contributing
+* Nueva bolilla  
+* Jugadas anteriores
+* Estado del juego  
+* Se corta al generar un ganador
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 🎮 Flujo simple del Bingo
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. El admin inicia un juego desde el panel.  
+2. Los usuarios que deseen participar generan una tarjeta con 10 numeros únicos.
+3. Los jugadores tienen sus tarjetas vinculadas a ese juego.
+4. Cada bolilla lanzada se transmite por WebSocket.  
+5. Todos los clientes actualizan su cartón en vivo.  
+6. Cuando un cartón es ganador, se emite un evento final (`JuegoGanado`).  
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🧩 Tecnologías principales
 
-## License
+* **Laravel 12**  
+* **Laravel Reverb** (WebSockets)  
+* **Laravel Echo**  
+* **Blade / JavaScript**  
+* **SQLite**  
+* **TailwindCSS** 
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# Bingo
+---
